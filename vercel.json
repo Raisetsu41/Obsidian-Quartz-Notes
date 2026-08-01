@@ -1,6 +1,6 @@
 {
   "cleanUrls": true,
-  "buildCommand": "cd blog && ln -sf ../Notes content && npm run build",
+  "buildCommand": "cd blog && npm run build",
   "outputDirectory": "blog/public",
   "installCommand": "cd blog && npm ci"
 }
