@@ -9,7 +9,7 @@ configuration:
   enablePopovers: true                         # 悬浮预览
   analytics: null                              # 分析服务
   locale: zh-CN                                # 界面语言
-  baseUrl: obsidian-quartz-notes-ten.vercel.app                        # 你的域名
+  baseUrl: example.com                     # 你的域名
   ignorePatterns:
     - ".git"
     - ".obsidian"
