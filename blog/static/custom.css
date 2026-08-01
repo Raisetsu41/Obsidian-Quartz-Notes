@@ -1,0 +1,212 @@
+﻿/* ============================================
+   Raisetsu41's Notes — 自定义样式
+   基于 Quartz 5，灵感来自 catmuse.me
+   ============================================ */
+
+/* ----- 字体 ----- */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  --titleFont: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+  --headerFont: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+  --bodyFont: "Noto Serif SC", system-ui, -apple-system, sans-serif;
+  --codeFont: "JetBrains Mono", "Fira Code", monospace;
+}
+
+/* ----- 全局背景：玻璃拟态 + 专辑封面 ----- */
+/* 将 花と水飴、最終電車 封面放到 blog/static/album-cover.jpg */
+body {
+  background-color: var(--light);
+  background-image: url('/static/album-cover.jpg');
+  background-size: cover;
+  background-position: center 20%;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+/* 半透明遮罩层，让文字可读 */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: rgba(255, 253, 250, 0.85);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+/* dark mode 下加深遮罩 */
+[saved-theme="dark"] body::before {
+  background: rgba(22, 22, 24, 0.88);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+/* ----- 玻璃拟态卡片 ----- */
+article,
+.page-content,
+.recent-notes,
+.backlinks,
+.graph,
+.search-container,
+.tag-container,
+.folder-container {
+  background: rgba(255, 253, 250, 0.6) !important;
+  backdrop-filter: blur(12px) saturate(120%);
+  -webkit-backdrop-filter: blur(12px) saturate(120%);
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+}
+
+[saved-theme="dark"] article,
+[saved-theme="dark"] .page-content,
+[saved-theme="dark"] .recent-notes,
+[saved-theme="dark"] .backlinks,
+[saved-theme="dark"] .graph {
+  background: rgba(22, 22, 24, 0.7) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+}
+
+/* ----- 链接悬停效果 ----- */
+a.internal,
+a.external {
+  transition: all 0.2s ease;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+a.internal:hover,
+a.external:hover {
+  border-bottom-color: var(--secondary);
+  opacity: 0.85;
+}
+
+/* ----- 代码块美化 ----- */
+pre {
+  border-radius: 10px !important;
+  border: 1px solid var(--lightgray) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+/* ----- Callout 美化 ----- */
+.callout {
+  border-radius: 10px !important;
+  border-left-width: 4px !important;
+  background: rgba(255, 255, 255, 0.4) !important;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+/* ----- 表格美化 ----- */
+table {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.04);
+}
+th {
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+/* ----- 滚动条美化 ----- */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--gray);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--darkgray);
+}
+
+/* ----- 页面加载过渡 ----- */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+article {
+  animation: fadeInUp 0.5s ease-out;
+}
+
+/* ----- 粒子画布层（配合 background.js）----- */
+#particles-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+[saved-theme="dark"] #particles-canvas {
+  opacity: 0.35;
+}
+
+/* ----- 标题样式 ----- */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--headerFont);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+h1 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--lightgray);
+}
+
+/* ----- 首页大标题特殊处理 ----- */
+.page-title {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+/* ----- 标签页美化 ----- */
+.tag {
+  transition: all 0.2s ease;
+  border-radius: 6px;
+}
+.tag:hover {
+  transform: translateY(-1px);
+}
+
+/* ----- 页脚 ----- */
+footer {
+  opacity: 0.7;
+  font-size: 0.85rem;
+  text-align: center;
+  padding: 2rem 0;
+}
+
+/* ----- 搜索结果 ----- */
+.search-container {
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+}
+
+/* ----- 响应式微调 ----- */
+@media (max-width: 768px) {
+  body::before {
+    backdrop-filter: blur(1px);
+  }
+  article {
+    border-radius: 8px !important;
+    margin: 0.5rem;
+  }
+}

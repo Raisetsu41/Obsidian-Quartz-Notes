@@ -1,0 +1,23 @@
+# Obsidian
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/plugins/*/main.js
+.obsidian/plugins/*/manifest.json
+.obsidian/plugins/*/styles.css
+.obsidian/themes/*/theme.css
+.obsidian/themes/*/manifest.json
+.trash/
+
+# Blog build
+blog/node_modules/
+blog/public/
+blog/.quartz-cache/
+blog/prof/
+blog/tsconfig.tsbuildinfo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Content symlink (created locally)
+blog/content/
