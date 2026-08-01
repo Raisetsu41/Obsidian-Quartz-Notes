@@ -19,5 +19,3 @@ blog/tsconfig.tsbuildinfo
 .DS_Store
 Thumbs.db
 
-# Content symlink (created locally)
-blog/content/
