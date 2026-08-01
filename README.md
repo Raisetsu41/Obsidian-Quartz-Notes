@@ -2,6 +2,8 @@
 
 > 基于实际生产配置编写。全程 Obsidian 内完成，直接推送 GitHub → Vercel 自动部署。
 
+最终效果: https://notes.raisetsu41.top/
+
 ---
 
 ## 前置要求
