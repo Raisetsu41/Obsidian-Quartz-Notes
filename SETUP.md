@@ -14,7 +14,7 @@
 2. [Fork 并克隆仓库](#2-fork-并克隆仓库)
 3. [Obsidian 配置](#3-obsidian-配置)
 4. [安装 Obsidian 插件](#4-安装-obsidian-插件)
-5. [连接内容目录](#5-连接内容目录)
+5. [笔记目录结构](#5-笔记目录结构)
 6. [自定义博客配置](#6-自定义博客配置)
 7. [本地测试（可选）](#7-本地测试可选)
 8. [部署到 Vercel](#8-部署到-vercel)
@@ -63,7 +63,7 @@ cd Obsidian-Quartz-Notes
 1. 启动 Obsidian
 2. 点击左侧「打开其他仓库」按钮
 3. 点击「打开文件夹作为仓库」
-4. 选择克隆下来的 `Obsidian-Quartz-Notes` 文件夹
+4. 选择克隆下来的 `Obsidian-Quartz-Notes/blog/content` 文件夹（它就是 Obsidian 库根目录）
 5. 在弹出的「安全模式」提示中点击「信任作者并启用插件」
 
 #### 3.2 配置 Templater
@@ -73,7 +73,7 @@ Templater 是模板引擎，需要手动安装：
 1. 设置 → 社区插件 → 浏览
 2. 搜索 **Templater** → 安装 → 启用
 3. 在 Templater 设置中：
-   - **Template folder location**: `Notes/04-Templates`
+   - **Template folder location**: `04-Templates`（相对 Obsidian 库根目录，仓库内实际路径为 `blog/content/04-Templates`）
    - 打开「Trigger Templater on new file creation」
    - 打开「Automatic jump to cursor」
 
@@ -106,32 +106,26 @@ Templater 是模板引擎，需要手动安装：
 
 ---
 
-### 5. 连接内容目录
+### 5. 笔记目录结构
 
-Quartz 需要从 `Notes/` 读取你的笔记。
+笔记直接存放在 `blog/content/` 下，它既是 Obsidian 库根目录，也是 Quartz 构建时读取的内容目录，**不需要任何符号链接或额外配置**。
 
-#### Windows（PowerShell，需管理员权限）
-
-```powershell
-Remove-Item -Recurse -Force blog\content -ErrorAction SilentlyContinue
-New-Item -ItemType Junction -Path blog\content -Target Notes
+```
+blog/content/
+├── .obsidian/     # Obsidian 配置（本地，不提交到 git）
+├── index.md       # 博客主页
+├── 00-Inbox/      # 收集箱
+├── 01-Courses/    # 课程笔记
+├── 02-Diary/      # 日记（默认不发布）
+├── 03-Music/      # 音乐笔记
+├── 04-Templates/  # Templater 模板（不发布）
+├── 05-Languages/  # 语言学习
+├── 06-Katex/      # 数学公式测试
+├── 07-Futures/    # 功能测试页
+└── assets/        # 附件
 ```
 
-#### macOS / Linux
-
-```bash
-rm -rf blog/content
-ln -s ../Notes blog/content
-```
-
-#### 验证
-
-```bash
-ls blog/content/
-# 应看到：00-Inbox/  01-Courses/  ...  index.md  demo-showcase.md
-```
-
-> 💡 Vercel 构建时自动处理此步骤，`vercel.json` 已包含。
+> 💡 写好笔记后直接 `git add . && git commit && git push`（或使用 Obsidian Git 插件），Vercel 会自动重新构建。
 
 ---
 
@@ -260,7 +254,7 @@ ls blog/content/index.md
 <summary><b>模板不生效？</b></summary>
 
 1. Templater 已安装并启用
-2. 模板文件夹设为 `Notes/04-Templates`
+2. 模板文件夹设为 `04-Templates`
 3.「Trigger Templater on new file creation」已开启
 </details>
 
@@ -294,7 +288,7 @@ ls blog/content/index.md
 2. [Fork & Clone](#2-fork--clone)
 3. [Obsidian Setup](#3-obsidian-setup)
 4. [Install Plugins](#4-install-plugins)
-5. [Link Content Directory](#5-link-content-directory)
+5. [Notes Directory](#5-notes-directory)
 6. [Customize Config](#6-customize-config)
 7. [Local Preview](#7-local-preview)
 8. [Deploy to Vercel](#8-deploy-to-vercel)
@@ -332,11 +326,11 @@ cd Obsidian-Quartz-Notes
 
 ### 3. Obsidian Setup
 
-1. Open Obsidian → "Open folder as vault" → select the cloned folder
+1. Open Obsidian → "Open folder as vault" → select the cloned `blog/content` folder
 2. Trust author and enable plugins when prompted
 3. Install **Templater** plugin:
    - Settings → Community plugins → Browse → Templater → Install → Enable
-   - Set **Template folder location**: `Notes/04-Templates`
+   - Set **Template folder location**: `04-Templates` (relative to the vault root, i.e. `blog/content/04-Templates`)
    - Enable "Trigger Templater on new file creation"
 4. Install **Obsidian Git** plugin:
    - Settings → Community plugins → Browse → Obsidian Git → Install → Enable
@@ -355,21 +349,26 @@ cd Obsidian-Quartz-Notes
 
 ---
 
-### 5. Link Content Directory
+### 5. Notes Directory
 
-**Windows (PowerShell as Admin):**
-```powershell
-Remove-Item -Recurse -Force blog\content -ErrorAction SilentlyContinue
-New-Item -ItemType Junction -Path blog\content -Target Notes
+Notes live directly in `blog/content/`, which is both the Obsidian vault root and the content directory Quartz reads at build time. **No symlink or extra setup is needed.**
+
+```text
+blog/content/
+├── .obsidian/     # Obsidian config (local only, not committed)
+├── index.md       # Blog home page
+├── 00-Inbox/      # Inbox
+├── 01-Courses/    # Course notes
+├── 02-Diary/      # Diary (hidden by default)
+├── 03-Music/      # Music notes
+├── 04-Templates/  # Templater templates (not published)
+├── 05-Languages/  # Language learning
+├── 06-Katex/      # Math demos
+├── 07-Futures/    # Feature tests
+└── assets/        # Attachments
 ```
 
-**macOS / Linux:**
-```bash
-rm -rf blog/content
-ln -s ../Notes blog/content
-```
-
-> 💡 Vercel handles this automatically via `vercel.json`.
+> 💡 After writing, just `git add . && git commit && git push` (or use the Obsidian Git plugin) and Vercel rebuilds automatically.
 
 ---
 
@@ -443,13 +442,17 @@ Write in Obsidian → Ctrl+P "Obsidian Git: Create backup" → Blog auto-updates
 <details>
 <summary><b>Build fails: "content directory not found"?</b></summary>
 
-Re-run step 5 to create the content symlink.
+Check that `blog/content` is committed as a real directory:
+```bash
+git ls-files blog/content | head
+```
+If empty, run `git add blog/content && git commit && git push`.
 </details>
 
 <details>
 <summary><b>Templates not working?</b></summary>
 
-Ensure Templater is installed, template folder is set, and "Trigger on new file creation" is enabled.
+Ensure Templater is installed, template folder is set to `04-Templates`, and "Trigger on new file creation" is enabled.
 </details>
 
 <details>
