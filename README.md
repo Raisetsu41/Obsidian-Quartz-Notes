@@ -31,7 +31,7 @@
 1. 点击上方的 **Deploy with Vercel** 按钮
 2. 按提示创建你自己的 Git 仓库
 3. Vercel 自动构建并部署
-4. 克隆仓库到本地，用 Obsidian 打开
+4. 克隆仓库到本地，用 Obsidian 打开 `blog/content` 文件夹（它就是 Obsidian 库根目录）
 5. 安装推荐插件，开始写作！
 
 详细步骤请见 [SETUP.md](./SETUP.md)。
@@ -40,19 +40,19 @@
 
 ```
 Obsidian-Quartz-Notes/
-├── .obsidian/               # Obsidian 配置
-├── Notes/                   # 📝 你的笔记
-│   ├── index.md             #   博客主页
-│   ├── demo-showcase.md     #   功能展示页（全功能测试）
-│   ├── demo-math.md         #   数学公式测试
-│   ├── demo-i18n.md         #   多语言测试
-│   ├── 00-Inbox/            #   收集箱
-│   ├── 01-Courses/          #   课程笔记（含示例）
-│   ├── 02-Diary/            #   日记
-│   ├── 03-Music/            #   音乐笔记（含示例）
-│   ├── 04-Templates/        #   Templater 模板
-│   └── assets/              #   附件
-├── blog/                    # 🏗️ Quartz 5 引擎
+├── blog/                    # 🏗️ Quartz 5 引擎 + 你的笔记
+│   ├── content/             # 📝 你的笔记（Obsidian 库根目录，直接编辑这里）
+│   │   ├── .obsidian/       #   Obsidian 配置（本地，不提交到 git）
+│   │   ├── index.md         #   博客主页
+│   │   ├── demo-showcase.md #   功能展示页（全功能测试）
+│   │   ├── demo-math.md     #   数学公式测试
+│   │   ├── demo-i18n.md     #   多语言测试
+│   │   ├── 01-Courses/      #   课程笔记（含示例）
+│   │   ├── 03-Music/        #   音乐笔记（含示例）
+│   │   ├── 04-Templates/    #   Templater 模板（不发布）
+│   │   ├── 05-Languages/    #   语言学习
+│   │   ├── 06-Katex/        #   数学公式测试页
+│   │   └── 07-Futures/      #   功能测试页
 │   ├── quartz.config.default.yaml  # 博客配置
 │   ├── quartz/styles/custom.scss   # 自定义样式
 │   └── static/              #   静态资源
@@ -107,7 +107,7 @@ MIT License — 自由使用、修改、分发。
 1. Click the **Deploy with Vercel** button above
 2. Follow the prompts to create your own Git repository
 3. Vercel builds and deploys automatically
-4. Clone the repo locally, open with Obsidian
+4. Clone the repo locally and open `blog/content` as an Obsidian vault
 5. Install recommended plugins, start writing!
 
 For detailed instructions, see [SETUP.md](./SETUP.md).
